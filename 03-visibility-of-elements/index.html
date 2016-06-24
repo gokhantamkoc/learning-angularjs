@@ -4,12 +4,12 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
   </head>
   <body>
-    <div ng-controller="StoreController as storeController">
+    <div ng-controller="StoreController as storeController" ng-hide="storeController.product.soldOut">
       <h1>{{storeController.product.name}}</h1>
       <h2>$ {{storeController.product.price}}</h2>
       <p>{{storeController.product.type}}</p>
       <p>{{storeController.product.description}}</p>
-      <button>Add to Cart</button>
+      <button ng-show="storeController.product.canPurchase">Add to Cart</button>
       <!--
       outside of this place is out of scope of StoreController.
       hence, {{storeController.product.name}} will not work!

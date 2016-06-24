@@ -9,6 +9,8 @@
     name: 'greyder',
     price: 40.0,
     type: 'casual',
-    description: 'this shoe is constructed with hovercraft technology.'
+    description: 'this shoe is constructed with hovercraft technology.',
+    canPurchase: true,
+    soldOut: false
   }
 })();
