@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html ng-app="store">
+<html ng-app="shoeStore">
   <head>
+    <title>Learning Angular.js by Gokhan Tamkoc</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
   </head>
   <body>
-    <div ng-controller="StoreController as storeController" ng-hide="storeController.product.soldOut">
-      <h1>{{storeController.product.name}}</h1>
-      <h2>$ {{storeController.product.price}}</h2>
-      <p>{{storeController.product.type}}</p>
-      <p>{{storeController.product.description}}</p>
-      <button ng-show="storeController.product.canPurchase">Add to Cart</button>
+    <div ng-controller="ShoeStoreController as shoeStore" ng-hide="shoeStore.product.soldOut">
+      <h1>{{shoeStore.product.name}}</h1>
+      <h2>${{shoeStore.product.price}}</h2>
+      <p>{{shoeStore.product.type}}</p>
+      <p>{{shoeStore.product.description}}</p>
+      <button ng-show="shoeStore.product.canPurchase">Add to Cart</button>
       <!--
       outside of this place is out of scope of StoreController.
       hence, {{storeController.product.name}} will not work!
