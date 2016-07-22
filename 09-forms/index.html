@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="shoeStore">
+  <head>
+    <title>Learning Angular.js by Gokhan Tamkoc</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container" ng-controller="ShoeStoreController as shoeStore">
+      <div ng-repeat="product in shoeStore.products | orderBy: '-price'">
+        <div ng-hide="product.soldOut">
+          <h1>{{product.name}}</h1>
+          <img ng-src="{{product.imagePath}}"/>
+          <h2>{{product.price | currency}}</h2>
+          <p>{{product.type}}</p>
+          <p>Release Date: {{product.releaseDate | date: 'dd/MM/yyyy'}}</p>
+          <section ng-controller="PanelController as panel">
+            <ul class="nav nav-pills">
+              <li ng-class="{active:panel.isSelectedTab(1)}">
+                <a href ng-click="panel.selectTab(1)">Description</a>
+              </li>
+              <li ng-class="{active:panel.isSelectedTab(2)}">
+                <a href ng-click="panel.selectTab(2)">Specification</a>
+              </li>
+              <li ng-class="{active:panel.isSelectedTab(3)}">
+                <a href ng-click="panel.selectTab(3)">Comments</a>
+              </li>
+            </ul>
+            <div class="panel" ng-show="panel.isSelectedTab(1)">
+              <h4>Description</h4>
+              <p>{{product.description}}</p>
+            </div>
+            <div class="panel" ng-show="panel.isSelectedTab(2)">
+              <h4>Specification</h4>
+              <blockquote>Not entered yet!</blockquote>
+            </div>
+            <div class="panel" ng-show="panel.isSelectedTab(3)">
+              <h4>Comments</h4>
+              <form name="commentForm" ng-controller="CommentController as commentCtrl">
+
+                <blockquote ng-repeat="comment in product.comments">
+                  <b>Rate:</b> {{comment.rating}}
+                  <p>{{comment.body}}</p>
+                  <cite>{{comment.author}}</cite>
+                </blockquote>
+
+                <div class="input-group">
+                  <span class="input-group-addon">Rating</span>
+                  <select class="form-control" ng-model="commentCtrl.comment.rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" ng-model="commentCtrl.comment.body"></textarea>
+                </div>
+
+                <br/>
+
+                <div class="input-group">
+                  <span class="input-group-addon">E-mail</span>
+                  <input class="form-control" type="email" ng-model="commentCtrl.comment.author"/>
+                </div>
+
+                <br/>
+
+                <button class="btn pull-right" ng-click="commentCtrl.addComment(product)">Send</button>
+
+              </form>
+
+            </div>
+          </section>
+          <button ng-show="product.canPurchase">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </body>
+</html>
